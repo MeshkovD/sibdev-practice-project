@@ -1,9 +1,15 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, ListModelMixin
+from rest_framework.viewsets import GenericViewSet
 
 from apps.test.models import Test
 from apps.test.serializers import TestSerializer
 
 
-class TestViewSet(ModelViewSet):
+class TestViewSet(
+    CreateModelMixin,
+    RetrieveModelMixin,
+    ListModelMixin,
+    GenericViewSet
+):
     serializer_class = TestSerializer
     queryset = Test.objects.all()
